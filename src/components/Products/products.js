@@ -1,17 +1,17 @@
 import productsData from "../../data/products.json";
 import "./products.css";
 
-function Product({ id, name, image }) {
+function Product({ id, name, image, onAddToCart }) {
   return (
     <div key={id} className="product">
       <img src={require(`../../assets/${image}`)} alt={name} />
       <div className="product-name">{name}</div>
-      <button>Add to cart</button>
+      <button onClick={() => onAddToCart(id, name, image)}>Add to cart</button>
     </div>
   );
 }
 
-function Products() {
+function Products({ onAddToCart }) {
   // we need to make product(jsx) from json file (standard method using map)
 
   return (
@@ -22,6 +22,7 @@ function Products() {
           id={product.id}
           name={product.name}
           image={product.image}
+          onAddToCart={onAddToCart}
         />
       ))}
     </div>
