@@ -23,15 +23,26 @@ function App() {
     //   quantity: 1,
     // });
 
-    //using alternatively useing spread operator in one line
+    //using alternatively useing spread operator in one line  ,pass by values(makes copy)no changes in original array
 
-    const cartItem = {
-      id: productId,
-      name: productName,
-      image: productImage,
-      quantity: 1,
-    };
-    setCartItems((state) => [...state, cartItem]);
+    const ProductInCartIndex = cartItems.findIndex(
+      (item) => item.id === productId
+    );
+
+    if (ProductInCartIndex === -1) {
+      const cartItem = {
+        id: productId,
+        name: productName,
+        image: productImage,
+        quantity: 1,
+      };
+
+      setCartItems((state) => [...state, cartItem]);
+    } else {
+      const updatedCartItems = [...cartItems];
+      updatedCartItems[ProductInCartIndex].quantity += 1;
+      setCartItems(updatedCartItems);
+    }
   };
 
   return (
