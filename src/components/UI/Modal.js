@@ -1,6 +1,6 @@
 import "./Modal.css";
 
-function Modal({ show, onclose, children }) {
+function Modal({ show, onClose, children }) {
   if (show === false) {
     return null;
   }
@@ -11,7 +11,7 @@ function Modal({ show, onclose, children }) {
 
   return (
     // <div className="backdrop" onClick={demo}>
-    <div className="backdrop" onClick={onclose}>
+    <div className="backdrop" onClick={onClose}>
       <div
         className="modal"
         onClick={(event) => {
