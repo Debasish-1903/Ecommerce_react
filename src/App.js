@@ -10,9 +10,15 @@ function App() {
 
   const [cartItems, setCartItems] = useState([]);
 
+  const [showAddProduct, setShowAddProduct] = useState(false);
+
   const openCart = () => setShowCart(true);
 
   const closeCart = () => setShowCart(false);
+
+  const openAddProduct = () => setShowAddProduct(true);
+
+  const closeAddProduct = () => setShowAddProduct(false);
 
   const handleAddToCart = (productId, productName, productImage) => {
     // let updatedCartItems = cartItems;
@@ -45,11 +51,43 @@ function App() {
     }
   };
 
+  const handleIncQuantity = (productId) => {
+    const ProductInCartIndex = cartItems.findIndex(
+      (item) => item.id === productId
+    );
+    const updatedCartItems = [...cartItems];
+    updatedCartItems[ProductInCartIndex].quantity += 1;
+    setCartItems(updatedCartItems);
+  };
+
+  const handleDecQuantity = (productId) => {
+    const ProductInCartIndex = cartItems.findIndex(
+      (item) => item.id === productId
+    );
+
+    let quant = cartItems[ProductInCartIndex].quantity;
+    let newCartItems = [...cartItems];
+
+    if (quant === 1) {
+      newCartItems = newCartItems.filter((item) => item.id !== productId);
+    } else {
+      newCartItems[ProductInCartIndex].quantity -= 1;
+    }
+
+    setCartItems(newCartItems);
+  };
+
   return (
     <div>
-      <Header openCart={openCart} />
+      <Header openCart={openCart} openShowProduct={openAddProduct} />
       <Products onAddToCart={handleAddToCart} />
-      <Cart showCart={showCart} closeCart={closeCart} cartItems={cartItems} />
+      <Cart
+        showCart={showCart}
+        closeCart={closeCart}
+        cartItems={cartItems}
+        onIncQuantity={handleIncQuantity}
+        onDecQuantity={handleDecQuantity}
+      />
     </div>
   );
 }

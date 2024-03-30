@@ -25,6 +25,11 @@
   justify-content: space-between;
 }
 
+.addProduct-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
 .close-cart {
   margin-right: 10px;
 }
