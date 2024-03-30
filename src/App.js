@@ -4,11 +4,14 @@ import { useState } from "react";
 import Header from "./components/Header/Header";
 import Products from "./components/Products/products";
 import Cart from "./components/Cart/Cart.js";
+import AddProduct from "./components/AddProduct/AddProduct.js";
+import initaldata from "./data/products.json";
 
 function App() {
   const [showCart, setShowCart] = useState(false);
 
   const [cartItems, setCartItems] = useState([]);
+  const [products, setProcuts] = useState(initaldata);
 
   const [showAddProduct, setShowAddProduct] = useState(false);
 
@@ -79,14 +82,19 @@ function App() {
 
   return (
     <div>
-      <Header openCart={openCart} openShowProduct={openAddProduct} />
-      <Products onAddToCart={handleAddToCart} />
+      <Header openCart={openCart} openAddProduct={openAddProduct} />
+      <Products products={products} onAddToCart={handleAddToCart} />
       <Cart
         showCart={showCart}
         closeCart={closeCart}
         cartItems={cartItems}
         onIncQuantity={handleIncQuantity}
         onDecQuantity={handleDecQuantity}
+      />
+
+      <AddProduct
+        showAddProduct={showAddProduct}
+        closeAddProduct={closeAddProduct}
       />
     </div>
   );
