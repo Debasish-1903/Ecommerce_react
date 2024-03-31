@@ -80,6 +80,16 @@ function App() {
     setCartItems(newCartItems);
   };
 
+  const hanldeAddProduct = (productName) => {
+    console.log(productName);
+    const product = {
+      id: products.length + 1,
+      name: productName,
+      image: "default_product.png",
+    };
+    setProcuts((state) => [...state, product]);
+  };
+
   return (
     <div>
       <Header openCart={openCart} openAddProduct={openAddProduct} />
@@ -95,6 +105,7 @@ function App() {
       <AddProduct
         showAddProduct={showAddProduct}
         closeAddProduct={closeAddProduct}
+        onAddProduct={hanldeAddProduct}
       />
     </div>
   );
